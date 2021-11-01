@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+th:replace="~{layout::layout(~{::title}, ~{}, ~{::section})}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<!-- form 을 username , password 으로 작성  -->
+<section>
+<div th:if="${param.error}">Failed. Check username and password.</div>
+<form th:action="@{/login}" method="post">
+Username <input type="text" name="username"/><br>
+Password <input type="password" name="password"><br>
+<input type="submit" value="Login"/>
+</form>
+</section>
+
+</body>
+</html>
