@@ -19,6 +19,9 @@ repositories {
 }
 
 dependencies {
+	// Spring security 의존성 추가 ( 이후 Gradle-> Refresh 해야함 ) 
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -30,8 +33,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	
-	// Spring security 의존성 추가 ( 이후 Refresh 해야함 ) 
-	implementation 'org.springframework.boot:spring-boot-starter-security'
+	
 }
 
 test {
