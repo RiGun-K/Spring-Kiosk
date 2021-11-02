@@ -10,4 +10,14 @@ public class WebController {
 	public String login() {
 		return "login";
 	}
+	
+	@GetMapping("/denied")
+	public String denied() {
+		return "denied";
+	}
+	
+	@GetMapping("/adduser")
+	public String user() {
+		return "addUser";
+	}
 }
