@@ -20,4 +20,10 @@ public class WebController {
 	public String user() {
 		return "addUser";
 	}
+	
+
+	@GetMapping("/index")
+	public String index() {
+		return "index";
+	}
 }
