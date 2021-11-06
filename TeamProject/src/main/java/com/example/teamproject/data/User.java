@@ -13,8 +13,8 @@ public class User {
 	private String userid;
 	@Column(nullable=false, length=100)
 	private String name;
-	private int point;
 	
+
 	public User() {}
 	public User(String userid, String name) {
 		// TODO Auto-generated constructor stub
@@ -33,12 +33,7 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getPoint() {
-		return point;
-	}
-	public void setPoint(int point) {
-		this.point = point;
-	}
+	
 	
 	
 }
