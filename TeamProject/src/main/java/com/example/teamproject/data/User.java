@@ -12,27 +12,29 @@ public class User {
 	@Id
 	private String userid;
 	@Column(nullable=false, length=100)
-	private String name;
+	private String password;
 	
 
 	public User() {}
-	public User(String userid, String name) {
+	public User(String userid, String password) {
 		// TODO Auto-generated constructor stub
 		this.userid = userid;
-		this.name = name;
+		this.password = password;
 	}
+	
 	public String getUserid() {
 		return userid;
 	}
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
-	public String getName() {
-		return name;
+	public String getPassword() {
+		return password;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setPassword(String password) {
+		this.password = password;
 	}
+
 	
 	
 	

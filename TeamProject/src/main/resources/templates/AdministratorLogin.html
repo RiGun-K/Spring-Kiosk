@@ -1,14 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" 
+ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+ crossorigin="anonymous"></script>
+ <!-- BootStemp -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+<!-- '관리자로그인' 버튼을 누르면 여기로 이동 -->
+<!-- 로그인이 되면 AdministratorMain.html 으로 이동 -->
+
+<!-- '회원가입' 버튼을 누르면 AdministratorRegister.html로 이동 -->
 </head>
 <body>
 
-<!-- '관리자로그인' 버튼을 누르면 여기로 이동 -->
-<!-- 로그인이 되면 AdministratorLogin.html 으로 이동 -->
+	<div class="col-md-15">
+    <div class="col-md-5">
+	<form class="form-horizontal">
+  		<div class="form-group">
+    		<label for="inputEmail3" class="col-sm-2 control-label">ID</label>
+    			<div class="col-sm-10">
+      		<input type="email" class="form-control" id="userid" placeholder="아이디를 입력하세요">
+   				</div>
+  		</div>
+  		<div class="form-group">
+   			 <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+    			<div class="col-sm-10">
+     		 <input type="password" class="form-control" id="password" placeholder="패스워드를 입력하세요">
+   				 </div>
+ 		 </div>
+ 		 
+ 		 <div class="form-group">
+    		<div class="col-sm-offset-2 col-sm-10">
+     		 <button type="submit" class="btn btn-default" id="send">로그인</button>
+     		 <button type="button" class="btn btn-primary" id="register" onclick="location.href='/register'">회원가입</button>
+    		</div>
+ 		 </div>
+ 		 
+ 		 <!-- text(result.userid) 값을 받아 출력 = userid 입력한 값 -->
+		 <p id="result"></p>
+ 	</form>
+	
+	<script>
+	$(function(){
+		$('#send').click((event)=>{
+			// 아이디,이름 값을 받아 /api/adduser 에 보내겠다 
+			const userid=$('#userid').val();
+			const password=$('#password').val();
+			const path='/api/login';
+			const json = JSON.stringify({
+				userid:userid,
+				password:password
+			});
+			$.ajax({
+				url:path,
+				type:'POST',
+				contentType: 'application/json',
+				data:json
+			}).done((result)=>{
+				console.log(result.userid);
+				$('#result').text(result.userid);
+				
+				alert('로그인 되었습니다.'); 
+				var url = "http://localhost:9002/";
+				window.location = url;
+				window.location.replace(url);
+			});
+		});	
+	});
+</script>
 
-<!-- '관리자등록' 버튼을 누르면 AdministratorRegister.html로 이동 -->
 </body>
 </html>

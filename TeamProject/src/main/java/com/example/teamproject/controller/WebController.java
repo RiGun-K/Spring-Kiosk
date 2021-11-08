@@ -23,9 +23,14 @@ public class WebController {
 		return "index";
 	}
 	
-	@GetMapping("/Login")
+	@GetMapping("/login")
 	public String login() {
-		return "AdministratorMain";
+		return "AdministratorLogin";
+	}
+	
+	@GetMapping("/register")
+	public String register() {
+		return "AdministratorRegister";
 	}
 	
 	
