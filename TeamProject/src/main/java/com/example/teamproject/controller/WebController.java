@@ -6,10 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class WebController {
 
-	@GetMapping("/login")
-	public String login() {
-		return "login";
-	}
 	
 	@GetMapping("/denied")
 	public String denied() {
@@ -26,4 +22,11 @@ public class WebController {
 	public String index() {
 		return "index";
 	}
+	
+	@GetMapping("/Login")
+	public String login() {
+		return "AdministratorMain";
+	}
+	
+	
 }
