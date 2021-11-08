@@ -41,8 +41,7 @@
     		</div>
  		 </div>
  		 
- 		 <!-- text(result.userid) 값을 받아 출력 = userid 입력한 값 -->
-		 <p id="result"></p>
+ 		 
  	</form>
 	
 	<script>
@@ -51,6 +50,10 @@
 			// 아이디,이름 값을 받아 /api/adduser 에 보내겠다 
 			const userid=$('#userid').val();
 			const password=$('#password').val();
+			if(userid==''||password==''){
+				  alert('로그인하려면 아이디와 비밀번호를 입력해야 합니다.');
+				  return;
+			  }
 			const path='/api/login';
 			const json = JSON.stringify({
 				userid:userid,
@@ -61,15 +64,23 @@
 				type:'POST',
 				contentType: 'application/json',
 				data:json
-			}).done((result)=>{
-				console.log(result.userid);
-				$('#result').text(result.userid);
-				
-				alert('로그인 되었습니다.'); 
-				var url = "http://localhost:9002/";
-				window.location = url;
-				window.location.replace(url);
-			});
+			})
+			
+			
+			.done((response)=>{
+		    	  if(response.result=='ok'){
+		    		  alert('로그인 되었습니다.');
+		    		  
+		    		  var url = "http://localhost:9002/";
+						window.location = url;
+						window.location.replace(url);
+		    	  } else {
+		    		  alert('등록되지않은 계정입니다.');
+		    	  }
+		    	})
+		    	.fail((response)=>{
+		    		alert('등록되지 않았습니다.');
+		    	});
 		});	
 	});
 </script>

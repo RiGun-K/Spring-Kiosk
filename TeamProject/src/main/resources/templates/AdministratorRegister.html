@@ -45,6 +45,10 @@
 			$('#save').click((event)=>{
 				const userid = $('#userid').val();
 				const password = $('#password').val();
+				if(userid==''||password==''){
+					  alert('회원가입 하려면 아이디와 비밀번호를 입력해야 합니다.');
+					  return;
+				  }
 				const path = '/api/register';
 				const json = JSON.stringify({
 					userid:userid,
