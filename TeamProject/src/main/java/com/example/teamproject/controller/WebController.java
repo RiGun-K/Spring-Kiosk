@@ -33,5 +33,10 @@ public class WebController {
 		return "AdministratorRegister";
 	}
 	
+	@GetMapping("/main")
+	public String main() {
+		return "AdministratorMain";
+	}
+	
 	
 }

@@ -1,13 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- jQuery 소스 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!-- BootStemp -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body>
 
 <!-- { 상품등록 전체상품조회 상품수정 매출통계 } 메뉴바로 구성된 화면 -->
-
-
+<h2>관리자 페이지</h2>
+<div class="form-group">
+    		<div class="col-sm-offset-2 col-sm-10">
+     		 <button type="submit" class="btn btn-default" onclick="location.href='/login'">상품등록</button>
+     		 <button type="button" class="btn btn-primary" id="save">전체상품조회</button>
+     		 <button type="button" class="btn btn-primary" id="save2">상품수정</button>
+     		 <button type="button" class="btn btn-primary" id="save3">매출통계</button>
+    		</div>
+</div>
 </body>
 </html>
