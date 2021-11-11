@@ -1,8 +1,11 @@
 package com.example.teamproject.data;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -13,6 +16,9 @@ public class Kind {
 	private int kindid;
 	@Column(nullable=false)
 	private String kindname;
+	
+	@OneToMany(mappedBy = "kind")
+	private List<Menu> menus;
 	
 	public Kind() {}
 	public Kind(int kindid, String kindname) {
@@ -33,5 +39,12 @@ public class Kind {
 		this.kindname = kindname;
 	}
 	
+
+	public List<Menu> getMenus() {
+		return menus;
+	}
+	public void setMenus(List<Menu> menus) {
+		this.menus = menus;
+	}
 	
 }

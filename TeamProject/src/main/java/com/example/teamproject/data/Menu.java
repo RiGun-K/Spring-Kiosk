@@ -4,7 +4,10 @@ import java.sql.Blob;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -23,11 +26,21 @@ public class Menu {
 	private Blob image;
 	private String ex;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "kind")
+	private Kind kind;
+	
 	// 생성자 우선 생략
 	// kindid(기본키) 와 맵핑해야됨. 
 	
 	public int getMenuid() {
 		return menuid;
+	}
+	public Kind getKind() {
+		return kind;
+	}
+	public void setKind(Kind kind) {
+		this.kind = kind;
 	}
 	public void setMenuid(int menuid) {
 		this.menuid = menuid;
