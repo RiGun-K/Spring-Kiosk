@@ -23,19 +23,24 @@ public class WebController {
 		return "index";
 	}
 	
+	@GetMapping("/cart")
+	public String cart() {
+		return "Cart";
+	}
+	
 	@GetMapping("/login")
 	public String login() {
-		return "AdministratorLogin";
+		return "AdminLogin";
 	}
 	
 	@GetMapping("/register")
 	public String register() {
-		return "AdministratorRegister";
+		return "AdminRegister";
 	}
 	
 	@GetMapping("/main")
 	public String main() {
-		return "AdministratorMain";
+		return "AdminMain";
 	}
 	
 	
