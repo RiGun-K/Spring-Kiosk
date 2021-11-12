@@ -14,6 +14,7 @@ import javax.persistence.Table;
  * @author RiGun
  *
  */
+
 @Entity
 @Table(name="menu")
 public class Menu {
@@ -32,6 +33,16 @@ public class Menu {
 	
 	// 생성자 우선 생략
 	// kindid(기본키) 와 맵핑해야됨. 
+	
+	public Menu(){}
+	public Menu(int menuid, String menuname, int price, Blob image, String ex) {
+		this.menuid = menuid;
+		this.menuname = menuname;
+		this.price = price;
+		this.image = image;
+		this.ex = ex;
+		
+	}
 	
 	public int getMenuid() {
 		return menuid;

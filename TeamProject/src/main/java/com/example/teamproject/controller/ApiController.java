@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.teamproject.repository.UserRepository;
 import com.example.teamproject.data.Result;
@@ -18,6 +19,7 @@ import com.example.teamproject.data.User;
 
 @RestController
 @RequestMapping("/api")
+@SessionAttributes()
 public class ApiController {
 	
 	
