@@ -62,6 +62,12 @@ public class WebController {
 	
 	///////////////////////////////// 관리자 /////////////////////
 	
+	@GetMapping("/pregister")
+	public String pregister() {
+		return "Pregister";
+	}
+	
+	
 	@GetMapping("/pcheck")
 	public String pcheck(Model model) {
 		model.addAttribute("menus", menuRepository.findAll());

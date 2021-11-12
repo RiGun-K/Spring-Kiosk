@@ -22,10 +22,11 @@
 		</thead>
 		<tbody>
 			<tr th:each="m : ${menus}">
+				<td th:text="${m.menuid}"></td>
 				<td th:text="${m.kind.kindid}"></td>
 				<td th:text="${m.menuname}"></td>
 				<td th:text="${m.price}"></td>
-				<td th:text="${m.menuid}"></td>
+				<td th:text="${m.image}"></td>
 				<td th:text="${m.ex}"></td>
 			</tr>
 		</tbody>
