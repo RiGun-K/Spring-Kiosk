@@ -222,7 +222,7 @@
                         <!-- BIRTH_MM -->
                         <div id="kind_num">
                             <span class="box">
-                                <select id="mm" class="sel">
+                                <select id="kindid" class="sel">
                                     <option>종류번호</option>
                                     <option value="01">1</option>
                                     <option value="02">2</option>
@@ -240,7 +240,7 @@
                 <div>
                     <h3 class="join_title"><label for="name">메뉴명</label></h3>
                     <span class="box int_name">
-                        <input type="text" id="name" class="int" maxlength="20">
+                        <input type="text" id="menuname" class="int" maxlength="20">
                     </span>
                     <span class="error_next_box"></span>
                 </div>
@@ -249,7 +249,7 @@
                 <div>
                     <h3 class="join_title"><label for="name">가격</label></h3>
                     <span class="box int_name">
-						<input type="text" id="name" class="int" maxlength="20">
+						<input type="text" id="price" class="int" maxlength="20">
 						<span class="step_url">원</span>
                     </span>
                     <span class="error_next_box"></span>
@@ -260,7 +260,7 @@
                 <div>
                     <h3 class="join_title"><label for="name">설명</label></h3>
                     <span class="box int_name">
-                        <input type="text" id="name" class="int" maxlength="20">
+                        <input type="text" id="ex" class="int" maxlength="20">
                     </span>
                     <span class="error_next_box"></span>
 				</div>
@@ -269,7 +269,7 @@
                
                 <div>
                     <h3 class="join_title"><label for="photoNo">사진등록</label></h3>
-                    <input type="file" id="real-input" class="image_inputType_file" accept="img/*" required multiple>
+                    <input type="file" id="image" class="image_inputType_file" accept="img/*" required multiple>
                     <button class="browse-btn">사진업로드</botton>      
                 </div>
 
@@ -278,7 +278,7 @@
 
                 <!-- JOIN BTN-->
                 <div class="btn_area">
-                    <button type="button" id="btnJoin">
+                    <button type="button" id="save">
                         <span>등록하기</span>
                     </button>
                 </div>
@@ -290,6 +290,50 @@
 
         </div> 
         <!-- wrapper -->
-    <script src="main.js"></script>
+    
+        <script>
+		$(function(){
+			$('#save').click((event)=>{
+				const kindid = $('#kind.kindid').val();
+                const menuname = $('#menuname').val();
+                const price = $('#price').val();
+                const ex = $('#ex').val();
+            
+	
+				if(kindid==''||menuname==''||price==''||ex==''){
+					  alert('상품등록 하려면 모든 항목을 입력해야 합니다.');
+					  return;
+				  }
+				const path = '/api/pregister';
+				const json = JSON.stringify({
+					kindid:kindid,
+                    menuname:menuname,
+                    price:price,
+                    ex:ex,
+                   
+				});
+				$.ajax({
+					url:path,
+					type:'POST',
+					contentType: 'application/json',
+					data:json,
+				    error:function(request,status,error){
+				        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
+
+				})
+				
+				.done((result)=>{
+					alert('상품등록 완료'); 
+					
+					var url = "http://localhost:9002/main";
+					window.location = url;
+					window.location.replace(url);
+					})
+				.fail((result)=>{
+					alert('상품등록 실패'); 
+					});
+			});
+		});
+	</script>
     </body>
 </html>
