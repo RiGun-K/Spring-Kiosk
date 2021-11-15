@@ -30,10 +30,17 @@ public class Menu {
 	@Column(nullable=false)
 	private String menuname;
 	private int price;
-	private Blob image;
+	private String image;
 	private String ex;
+	private int stock;
 	private LocalDateTime savedTime;
 	
+	public int getStock() {
+		return stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "kind")
 	private Kind kind;
@@ -48,12 +55,13 @@ public class Menu {
 		this.savedTime = savedTime;
 	}
 	public Menu(){}
-	public Menu(int menuid, String menuname, int price, Blob image, String ex, Kind kind) {
+	public Menu(int menuid, String menuname, int price, String image, String ex, Kind kind, int stock) {
 		this.menuid = menuid;
 		this.menuname = menuname;
 		this.price = price;
 		this.image = image;
 		this.ex = ex;
+		this.stock = stock;
 		this.kind = kind;
 
 	}
@@ -76,10 +84,11 @@ public class Menu {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public Blob getImage() {
+
+	public String getImage() {
 		return image;
 	}
-	public void setImage(Blob image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 	public String getEx() {

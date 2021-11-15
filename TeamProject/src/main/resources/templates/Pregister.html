@@ -83,6 +83,10 @@
             font-family: Dotum,'돋움',Helvetica,sans-serif;    
         }
 
+        .select_img img { 
+            margin:20px 0;
+        }
+
         .box.int_id {
             padding-right: 110px;
         }
@@ -238,6 +242,16 @@
 						<span class="step_url">원</span>
                     </span>
                     <span class="error_next_box"></span>
+                </div>
+                
+                <!-- STOCK -->
+                <div>
+                    <h3 class="join_title"><label for="name">수량</label></h3>
+                    <span class="box int_name">
+						<input type="text" id="stock" class="int" maxlength="20">
+						<span class="step_url">개</span>
+                    </span>
+                    <span class="error_next_box"></span>
 				</div>
 
 				
@@ -251,11 +265,23 @@
 				</div>
 				
 
-               
-                <div>
-                    <h3 class="join_title"><label for="photoNo">사진등록</label></h3>
-                    <input type="file" id="image" class="image_inputType_file" accept="img/*" required multiple>
-                    <button class="browse-btn">사진업로드</botton>      
+
+                <div class="inputArea">
+                  <h3 class="join_title"><label for="name">사진등록</label></h3>
+                    <input type="file" id="image" name="file" />
+                    <div class="select_img"><img src="Anonymous" /></div>
+             
+                    <script>
+                    $("#image").change(function(){
+                    if(this.files && this.files[0]) {
+                        var reader = new FileReader;
+                        reader.onload = function(data) {
+                        $(".select_img img").attr("src", data.target.result).width(300);        
+                        }
+                        reader.readAsDataURL(this.files[0]);
+                    }
+                    });
+                    </script>
                 </div>
 
                 
@@ -263,7 +289,7 @@
 
                 <!-- JOIN BTN-->
                 <div class="btn_area">
-                    <button type="button" id="save">
+                    <button type="button" id="save" class="btn btn-primary">
                         <span>등록하기</span>
                     </button>
                 </div>
@@ -282,21 +308,26 @@
 				const kind = $('#kind').val();
                 const menuname = $('#menuname').val();
                 const price = $('#price').val();
+                const stock = $('#stock').val();
                 const ex = $('#ex').val();
+                const image = $('#image').val();
             
 	
-				if(kind==''||menuname==''||price==''||ex==''){
+				if(kind==''||menuname==''||price==''||stock==''||ex==''||image==''){
 					  alert('상품등록 하려면 모든 항목을 입력해야 합니다.');
 					  return;
 				  }
 				const path = '/api/pregister';
 				const json = JSON.stringify({
 					kind:{
+                        // kind 테이블 : { kindid : kind }
                         kindid:kind
                     },
                     menuname:menuname,
                     price:price,
+                    stock:stock,
                     ex:ex,
+                    image:image
                    
                 });
                 console.log(json);
