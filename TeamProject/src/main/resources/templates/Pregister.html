@@ -212,28 +212,13 @@
 
 				<h1>상품 등록</h1>
 				
-                <!-- ID -->
+                <!-- kIND -->
                 <div>
-                    <h3 class="join_title">
-                        <label for="id">종류번호</label>
-					</h3>
-					<div id="bir_wrap">
-                    
-                        <!-- BIRTH_MM -->
-                        <div id="kind_num">
-                            <span class="box">
-                                <select id="kindid" class="sel">
-                                    <option>종류번호</option>
-                                    <option value="01">1</option>
-                                    <option value="02">2</option>
-                                    <option value="03">3</option>
-                                    <option value="04">4</option>
-                                    <option value="05">5</option>
-                                    <option value="06">6</option>
-                                </select>
-                            </span>
-                        </div>
-					</div>
+                    <h3 class="join_title"><label for="name">종류번호</label></h3>
+                    <span class="box int_name">
+                        <input type="text" id="kind" class="int" maxlength="1">
+                    </span>
+                    <span class="error_next_box"></span>
                 </div>
 
                 <!-- NAME -->
@@ -294,24 +279,27 @@
         <script>
 		$(function(){
 			$('#save').click((event)=>{
-				const kindid = $('#kind.kindid').val();
+				const kind = $('#kind').val();
                 const menuname = $('#menuname').val();
                 const price = $('#price').val();
                 const ex = $('#ex').val();
             
 	
-				if(kindid==''||menuname==''||price==''||ex==''){
+				if(kind==''||menuname==''||price==''||ex==''){
 					  alert('상품등록 하려면 모든 항목을 입력해야 합니다.');
 					  return;
 				  }
 				const path = '/api/pregister';
 				const json = JSON.stringify({
-					kindid:kindid,
+					kind:{
+                        kindid:kind
+                    },
                     menuname:menuname,
                     price:price,
                     ex:ex,
                    
-				});
+                });
+                console.log(json);
 				$.ajax({
 					url:path,
 					type:'POST',

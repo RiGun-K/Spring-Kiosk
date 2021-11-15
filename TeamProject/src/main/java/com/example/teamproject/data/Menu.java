@@ -48,23 +48,18 @@ public class Menu {
 		this.savedTime = savedTime;
 	}
 	public Menu(){}
-	public Menu(int menuid, String menuname, int price, Blob image, String ex) {
+	public Menu(int menuid, String menuname, int price, Blob image, String ex, Kind kind) {
 		this.menuid = menuid;
 		this.menuname = menuname;
 		this.price = price;
 		this.image = image;
 		this.ex = ex;
-		
+		this.kind = kind;
+
 	}
 	
 	public int getMenuid() {
 		return menuid;
-	}
-	public Kind getKind() {
-		return kind;
-	}
-	public void setKind(Kind kind) {
-		this.kind = kind;
 	}
 	public void setMenuid(int menuid) {
 		this.menuid = menuid;
@@ -93,6 +88,15 @@ public class Menu {
 	public void setEx(String ex) {
 		this.ex = ex;
 	}
+	public Kind getKind() {
+		return kind;
+	}
+	public void setKind(Kind kind) {
+		this.kind = kind;
+	}
+	
+	
+	////////////////////////
 	
 	
 	
