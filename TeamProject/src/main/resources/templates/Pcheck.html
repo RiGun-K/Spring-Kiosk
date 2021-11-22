@@ -24,17 +24,19 @@
 				<th>가격</th>
 				<th>이미지</th>
 				<th>설명</th>
+				<th>수정/삭제</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr th:each="m : ${menus}">
-				<td th:text="${m.menuid}"></td>
+				<td> <a th:text="${m.menuid}" th:href="@{/pcheck/{id}(id=${m.menuid})}"></a></td>
 				<td th:text="${m.kind.kindid}"></td>
 				<td th:text="${m.menuname}"></td>
 				<td th:text="${m.stock}"></td>
 				<td th:text="${m.price}"></td>
 				<td th:text="${m.image}"></td>
 				<td th:text="${m.ex}"></td>
+				<td> <a th:href="@{/pcheck/{id}(id=${m.menuid})}"></a></td>
 			</tr>
 		</tbody>
 	</table>

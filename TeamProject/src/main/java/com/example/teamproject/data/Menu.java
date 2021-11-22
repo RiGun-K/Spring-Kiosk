@@ -32,15 +32,9 @@ public class Menu {
 	private int price;
 	private String image;
 	private String ex;
-	private int stock;
+	private Integer stock;
 	private LocalDateTime savedTime;
 	
-	public int getStock() {
-		return stock;
-	}
-	public void setStock(int stock) {
-		this.stock = stock;
-	}
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "kind")
 	private Kind kind;
@@ -103,7 +97,14 @@ public class Menu {
 	public void setKind(Kind kind) {
 		this.kind = kind;
 	}
+	public Integer getStock() {
+		return stock;
+	}
+	public void setStock(Integer stock) {
+		this.stock = stock;
+	}
 	
+
 	
 	////////////////////////
 	

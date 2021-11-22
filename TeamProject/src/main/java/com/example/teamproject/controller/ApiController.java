@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.teamproject.repository.MenuRepository;
 import com.example.teamproject.repository.UserRepository;
@@ -41,7 +42,7 @@ public class ApiController {
 	}
 	
 	@PostMapping("/pregister")
-	public Menu addPregister(@RequestBody Menu menu) {
+	public Menu addPregister(@RequestBody Menu menu, MultipartFile file) {
 		// 추후 DB 코드 추가 = 아이디,이름 값이 저장버튼으로 넘어온 데이터를 받아서 DB에 Insert
 		if(menu.getSavedTime()==null)
 			menu.setSavedTime(LocalDateTime.now());

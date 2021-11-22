@@ -1,15 +1,18 @@
 package com.example.teamproject.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.teamproject.repository.MenuRepository;
 import com.example.teamproject.repository.UserRepository;
+
 import com.example.teamproject.data.Menu;
 import com.example.teamproject.mapper.MenuMapper;
 
@@ -77,10 +80,16 @@ public class WebController {
 	}
 	
 	// PRODUCT MODIFY
-	@GetMapping("/pmodify")
-	public String pmodify() {
+	@GetMapping("/pcheck/{menuid}")
+	public String getMenu(@PathVariable("menuid") int menuid, Model model) {
+		// 주소창의 menuid 값이 <Menu> 에 있는가 
+		Optional<Menu> searchedPost = menuRepository.findById(menuid);
+		if(searchedPost.isPresent()) {
+			model.addAttribute("menuid", searchedPost.get());
+		}
 		return "Pmodify";
 	}
+	
 	
 	// PRODUCT SALES STATS
 	@GetMapping("/pstats")
