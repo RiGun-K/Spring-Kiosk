@@ -32,6 +32,13 @@ public class WebController {
 		return "index";
 	}
 	
+	// PRACTICE PAGE
+	@GetMapping("/index")
+	public String index2() {
+		return "index2";
+	}
+	
+	
 	// CART PAGE
 	@GetMapping("/cart")
 	public String cart() {
