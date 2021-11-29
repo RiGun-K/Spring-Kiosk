@@ -11,7 +11,7 @@ import com.example.teamproject.data.Menu;
 public interface MenuRepository extends JpaRepository<Menu, Integer> {
 
 
-	public List<Menu> findByNameContains(String name);
+
 
 }
 
