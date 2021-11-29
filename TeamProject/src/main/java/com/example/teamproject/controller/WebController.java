@@ -3,12 +3,17 @@ package com.example.teamproject.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.teamproject.repository.MenuRepository;
 import com.example.teamproject.repository.UserRepository;
@@ -17,6 +22,7 @@ import com.example.teamproject.data.Menu;
 import com.example.teamproject.mapper.MenuMapper;
 
 @Controller
+@SessionAttributes("cart")	// ModelAttribute("cart")를 찾는다.
 public class WebController {
 	
 
@@ -34,14 +40,30 @@ public class WebController {
 	
 	// PRACTICE PAGE
 	@GetMapping("/index")
-	public String index2() {
+	public String index2(Model model) {
+		model.addAttribute("menus", menuRepository.findAll());
 		return "index2";
 	}
 	
 	
+	
+	
 	// CART PAGE
 	@GetMapping("/cart")
-	public String cart() {
+	@ModelAttribute("cart")
+	public String cart(HttpServletRequest request, Model model, HttpSession session) throws Exception {
+		
+		// 여기에 '담기' 버튼을 클릭한 정보 ( 상품수량,명 등 ) 이 담겨야 함 ! 
+		model.addAttribute("menus", menuRepository.findAll());
+		
+		// 세션 선언
+		session = request.getSession();
+		// session 저장( 값 부여 )
+//		session.setAttribute("저장하고자 하는 변수이름", 저장 변수값);
+		session.setAttribute("cart", "menus");
+		// session 가져오기 ( 조회 ) 
+		String userid = (String)session.getAttribute("cart");
+		System.out.println(userid);
 		return "Cart";
 	}
 

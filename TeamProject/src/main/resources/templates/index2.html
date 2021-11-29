@@ -64,39 +64,33 @@
 		<!-- 하나의 인덱스 -->
         <!-- Section-->
         <section class="py-5">
-            <div class="container px-4 px-lg-5 mt-5">
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="images/beef.jpg" alt="..." />
+                                        
+                            <div id="content">
+							<h2>상품</h2>
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>메뉴명</th>
+										<th>수량</th>
+										<th>가격</th>
+										<th>담기</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="m : ${menus}">
+										<td th:text="${m.menuname}"></td>
+										<td th:text="${m.stock}"></td>
+										<td th:text="${m.price}"></td>
+										<td>
+                            				<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                				<div class="text-center"><a class="btn btn-primary" href="#">담기</a></div>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							</div>
                             
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">삽겹살</h5>
-                                    <!-- Product price-->
-                                    $40.00 - $80.00
-                                </div>
-                            </div>
-                            
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-primary" href="#">담기</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                   
-                   
-                    
-                   
-                    
-                    
-                    
-                </div>
-            </div>
 		</section>
 		
 
