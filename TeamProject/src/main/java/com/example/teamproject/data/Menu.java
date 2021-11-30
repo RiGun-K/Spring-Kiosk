@@ -18,6 +18,8 @@ import javax.persistence.Table;
  *
  */
 
+// DTO 기능 ( DB의 특정 테이블의 정보를 정의 ) 
+
 @Entity
 @Table(name="menu")
 public class Menu {
