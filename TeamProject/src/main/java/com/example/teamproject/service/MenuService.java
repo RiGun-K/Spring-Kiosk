@@ -12,8 +12,10 @@ import com.example.teamproject.mapper.MenuMapper;
 public interface MenuService {
 
 	// 메뉴 테이블 리스트로 모두 조회
-	public List<Menu> findAll();
+	public Iterable<Menu> findAll();
+	// List => Iterable 로 수정
 	
 	// PK 조회 
 	public Menu find(int menuid);
 }
+ 
