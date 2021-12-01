@@ -58,11 +58,7 @@ public class WebController {
 	
 	@GetMapping("/indexcart")
 	public String indexcart(Model model) {
-		
-		// 둘다 동일하게 메뉴 테이블의 칼럼들을 다 가져옴 
-//		model.addAttribute("menus", menuRepository.findAll());
 		model.addAttribute("menus", menuService.findAll());
-
 		return "indexcart";
 	}
 	
@@ -76,7 +72,7 @@ public class WebController {
 		} else {
 			
 		}
-		return "redirect:index";
+		return "cartindex";
 	}
 	
 	

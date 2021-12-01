@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+ 		<div id="content">
+							<h2>담은 아이템</h2>
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>메뉴명</th>
+										<th>수량</th>
+										<th>가격</th>
+										<th>품질</th>
+										<th>합계</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="item : ${sessionScope.cart}">
+										<td th:text="${item.menuname}"></td>
+										<td th:text="${item.stock}"></td>
+										<td th:text="${item.price}"></td>
+										<td th:text="${item.quantity}"></td>
+										<td th:text="${item.price * item.quantity}"></td>
+									</tr>
+								</tbody>
+							</table>
+							</div>
+</body>
+</html>
