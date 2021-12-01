@@ -9,12 +9,11 @@ import com.example.teamproject.data.Menu;
 import com.example.teamproject.mapper.MenuMapper;
 
 @Service
-public class MenuService {
+public interface MenuService {
 
-	@Autowired
-	public MenuMapper menuMapper;
+	// 메뉴 테이블 리스트로 모두 조회
+	public List<Menu> findAll();
 	
-	public List<Menu> findAllMenu() {
-		return menuMapper.findAll();
-	}
+	// PK 조회 
+	public Menu find(int menuid);
 }
