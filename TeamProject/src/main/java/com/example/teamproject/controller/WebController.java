@@ -1,5 +1,6 @@
 package com.example.teamproject.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.example.teamproject.repository.MenuRepository;
 import com.example.teamproject.repository.UserRepository;
 import com.example.teamproject.service.MenuService;
+import com.example.teamproject.data.Cart;
 import com.example.teamproject.data.Menu;
 import com.example.teamproject.mapper.MenuMapper;
 
@@ -52,11 +54,29 @@ public class WebController {
 		return "index2";
 	}
 	
+	
+	
+	@GetMapping("/indexcart")
+	public String indexcart(Model model) {
+		
+		// 둘다 동일하게 메뉴 테이블의 칼럼들을 다 가져옴 
+//		model.addAttribute("menus", menuRepository.findAll());
+		model.addAttribute("menus", menuService.findAll());
+
+		return "indexcart";
+	}
+	
 	// '담기' 버튼을 누르면 메뉴명,가격 등의 정보를 세션에 담아 /index/메뉴번호 로 이동하여 출력
 	@GetMapping("/index/{id}")
 	public String carts(@PathVariable("id") int id, Model model, HttpSession session) {
-		model.addAttribute("carts", menuService.findAll());
-		return "indexs";
+		if(session.getAttribute("cart") == null) {
+			List<Cart> cart = new ArrayList<Cart>();
+			cart.add(new Cart(menuService.find(id), 1));
+			session.setAttribute("cart", cart);
+		} else {
+			
+		}
+		return "redirect:index";
 	}
 	
 	
