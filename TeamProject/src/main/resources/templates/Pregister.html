@@ -265,11 +265,12 @@
 				</div>
 				
 
-                <form  enctype="multipart/form-data"></form>
-                <div class="inputArea" enctype="multipart/form-data">
+                <!-- IMAGE -->
+                <form name="form" method="post" enctype="multipart/form-data">
+                <div class="inputArea">
                   <h3 class="join_title"><label for="name">사진등록</label></h3>
-                    <input type="file" id="image" name="file" />
-                    <div class="select_img"><img src="Anonymous" /></div>
+                    <input type="file" id="image" name="file" multiple="multiple"/>
+                    <div class="select_img"><img src="" /></div>
              
                     <script>
                     $("#image").change(function(){
@@ -282,7 +283,10 @@
                     }
                     });
                     </script>
+
+                    <%=request.getRealPath("/") %>
                 </div>
+                </form>
 
                 
 
