@@ -30,6 +30,10 @@ public class MenuService {
 		
 		file.transferTo(saveFile);
 		
+		menu.setFilename(filename);
+		menu.setFilepath("/images/" + filename);
+		
+		
 		menuRepository.save(menu);
 	}
 }
