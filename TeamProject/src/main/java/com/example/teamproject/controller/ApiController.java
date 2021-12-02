@@ -1,7 +1,12 @@
 package com.example.teamproject.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -9,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
@@ -43,8 +49,42 @@ public class ApiController {
 		return user;
 	}
 	
+	
+	// 이미지 등록
+	@PostMapping("/image/pregister")
+	public String uploadFile(MultipartFile[] upload, HttpServletRequest request) {
+		String saveDir = request.getSession().getServletContext().getRealPath("/resources/static/images");
+		
+		File dir = new File(saveDir);
+		if(!dir.exists()) {
+			dir.mkdirs();
+		}
+		
+		for(MultipartFile f : upload) {
+			if(!f.isEmpty()) {
+				String orifileName = f.getOriginalFilename();
+				String ext = orifileName.substring(orifileName.lastIndexOf("."));
+				
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd-HHmmssSSS");
+				int rand = (int)(Math.random()*1000);
+				
+				String reName = sdf.format(System.currentTimeMillis()) + "_" + rand + ext;
+				
+				try {
+					f.transferTo(new File(saveDir + "/" + reName)); 
+				} catch (IllegalStateException | IOException e) {
+					e.printStackTrace(); 
+				}
+
+				
+			}
+		}
+		return "uploadEnd";
+	}
+	
+	// 상품 등록 
 	@PostMapping("/pregister")
-	public Menu addPregister(@RequestBody Menu menu, MultipartFile file) {
+	public Menu addPregister(@RequestBody Menu menu) {
 		// 추후 DB 코드 추가 = 아이디,이름 값이 저장버튼으로 넘어온 데이터를 받아서 DB에 Insert
 		if(menu.getSavedTime()==null)
 			menu.setSavedTime(LocalDateTime.now());

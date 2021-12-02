@@ -266,11 +266,11 @@
 				
 
                 <!-- IMAGE -->
-                <form name="form" method="post" enctype="multipart/form-data">
+                <form name="form" action="${pageContext.request.contextPath}/api/pregister" method="post" enctype="multipart/form-data">
                 <div class="inputArea">
                   <h3 class="join_title"><label for="name">사진등록</label></h3>
-                    <input type="file" id="image" name="file" multiple="multiple"/>
-                    <div class="select_img"><img src="" /></div>
+                    <input type="file" id="image" name="upload" multiple="multiple"/>
+                    <div class="select_img"><img src="C:\Users\RiGun\git\Spring-Team\TeamProject\src\main\resources\static\images" /></div>
              
                     <script>
                     $("#image").change(function(){
@@ -284,7 +284,6 @@
                     });
                     </script>
 
-                    <%=request.getRealPath("/") %>
                 </div>
                 </form>
 
