@@ -216,11 +216,19 @@
 
 				<h1>상품 등록</h1>
 				
-                <!-- kIND -->
+                <!-- KIND -->
                 <div>
                     <h3 class="join_title"><label for="name">종류번호</label></h3>
                     <span class="box int_name">
-                        <input type="text" id="kind" class="int" maxlength="1">
+                        <select id="kindid">
+                            <option value="1">닭발</option>
+                            <option value="2">돼지고기</option>
+                            <option value="3">분식</option>
+                            <option value="4">반찬</option>
+                            <option value="5">탕</option> 
+                            <option value="6">양식</option>
+                            <option value="7">기타</option>
+                        </select>
                     </span>
                     <span class="error_next_box"></span>
                 </div>
@@ -266,14 +274,14 @@
 				
 
                 <!-- IMAGE -->
-                <form name="form" action="${pageContext.request.contextPath}/api/pregister" method="post" enctype="multipart/form-data">
-                <div class="inputArea">
+                <form name="form" method="post" enctype="multipart/form-data" th:action="@{/api/image/pregister}">
+                <div class="inputArea"
                   <h3 class="join_title"><label for="name">사진등록</label></h3>
-                    <input type="file" id="image" name="upload" multiple="multiple"/>
+                    <input type="file" id="filename" name="file" multiple="multiple"/>
                     <div class="select_img"><img src="C:\Users\RiGun\git\Spring-Team\TeamProject\src\main\resources\static\images" /></div>
              
                     <script>
-                    $("#image").change(function(){
+                    $("#filename").change(function(){
                     if(this.files && this.files[0]) {
                         var reader = new FileReader;
                         reader.onload = function(data) {
@@ -308,15 +316,19 @@
         <script>
 		$(function(){
 			$('#save').click((event)=>{
+                
 				const kind = $('#kind').val();
                 const menuname = $('#menuname').val();
                 const price = $('#price').val();
                 const stock = $('#stock').val();
                 const ex = $('#ex').val();
-                const image = $('#image').val();
+                const filename = $('#filename').val();
             
-	
-				if(kind==''||menuname==''||price==''||stock==''||ex==''||image==''){
+                const kindid = $('#kindid').val();
+                var a = ['닭발', '돼지고기', '분식', '반찬', '탕', '양식', '기타'];
+                const kindname = a[kindid];	
+                
+                if(kindid==''||menuname==''||price==''||stock==''||ex==''||filename==''){
 					  alert('상품등록 하려면 모든 항목을 입력해야 합니다.');
 					  return;
 				  }
@@ -324,13 +336,14 @@
 				const json = JSON.stringify({
 					kind:{
                         // kind 테이블 : { kindid : kind }
-                        kindid:kind
+                        kindid:kindid,
+                        kindname:kindname
                     },
                     menuname:menuname,
                     price:price,
                     stock:stock,
                     ex:ex,
-                    image:image
+                    filename:filename
                    
                 });
                 console.log(json);

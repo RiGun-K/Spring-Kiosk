@@ -28,6 +28,7 @@
       </select>   <br>
    수량 <input id="stock" type="number" th:value="${menu.stock}"><br>
    설명 <textarea  rows="5" cols="30" id="ex" th:text="${menu.ex}"> </textarea><br>
+   사진 <textarea  rows="5" cols="30" id="filename" th:text="${menu.filename}"> </textarea><br>
    <button class="modify"> 수정 </button>
    </div>
    <script>
@@ -42,7 +43,8 @@
                   const menuid = $('#menuid').val();
                   var a = ['닭발', '돼지고기', '분식', '반찬', '탕', '양식', '기타'];
                   const kindname = a[kindid];
-                        
+            const filename = $('#filename').val();
+                  
             const path = '/api/modify';
             const json = JSON.stringify({
                'menuid':menuid,
@@ -53,7 +55,8 @@
                },
                'price':price,
                'stock':stock,
-               'ex':ex
+               'ex':ex,
+               'filename':filename
                    
                 });
                 console.log(kindname);

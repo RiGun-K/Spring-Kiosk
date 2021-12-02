@@ -32,7 +32,8 @@ public class Menu {
 	@Column(nullable=false)
 	private String menuname;
 	private int price;
-	private String image;
+	private String filename;
+	private String filepath;
 	private String ex;
 	private Integer stock;
 	private LocalDateTime savedTime;
@@ -51,11 +52,12 @@ public class Menu {
 		this.savedTime = savedTime;
 	}
 	public Menu(){}
-	public Menu(int menuid, String menuname, int price, String image, String ex, Kind kind, int stock) {
+	public Menu(int menuid, String menuname, int price, String filename, String filepath, String ex, Kind kind, int stock) {
 		this.menuid = menuid;
 		this.menuname = menuname;
 		this.price = price;
-		this.image = image;
+		this.filename = filename;
+		this.filepath = filepath;
 		this.ex = ex;
 		this.stock = stock;
 		this.kind = kind;
@@ -80,13 +82,7 @@ public class Menu {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-
-	public String getImage() {
-		return image;
-	}
-	public void setImage(String image) {
-		this.image = image;
-	}
+	
 	public String getEx() {
 		return ex;
 	}
@@ -106,7 +102,18 @@ public class Menu {
 		this.stock = stock;
 	}
 	
-
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+	public String getFilepath() {
+		return filepath;
+	}
+	public void setFilepath(String filepath) {
+		this.filepath = filepath;
+	}
 	
 	////////////////////////
 	

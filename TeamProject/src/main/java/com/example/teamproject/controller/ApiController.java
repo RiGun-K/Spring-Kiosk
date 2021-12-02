@@ -9,6 +9,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -18,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.teamproject.repository.MenuRepository;
 import com.example.teamproject.repository.UserRepository;
+import com.example.teamproject.service.MenuService;
 import com.example.teamproject.data.Menu;
 import com.example.teamproject.data.Result;
 import com.example.teamproject.data.User;
@@ -40,6 +43,9 @@ public class ApiController {
 	@Autowired
 	private MenuRepository menuRepository;
 	
+	@Autowired
+	private MenuService menuService;
+	
 	@PostMapping("/register")
 	public User addUser(@RequestBody User user) {
 		// 추후 DB 코드 추가 = 아이디,이름 값이 저장버튼으로 넘어온 데이터를 받아서 DB에 Insert
@@ -52,34 +58,14 @@ public class ApiController {
 	
 	// 이미지 등록
 	@PostMapping("/image/pregister")
-	public String uploadFile(MultipartFile[] upload, HttpServletRequest request) {
-		String saveDir = request.getSession().getServletContext().getRealPath("/resources/static/images");
+	public String uploadFile(Menu menu, Model model, MultipartFile file) throws Exception {
 		
-		File dir = new File(saveDir);
-		if(!dir.exists()) {
-			dir.mkdirs();
-		}
+		menuService.write(menu, file);
 		
-		for(MultipartFile f : upload) {
-			if(!f.isEmpty()) {
-				String orifileName = f.getOriginalFilename();
-				String ext = orifileName.substring(orifileName.lastIndexOf("."));
-				
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd-HHmmssSSS");
-				int rand = (int)(Math.random()*1000);
-				
-				String reName = sdf.format(System.currentTimeMillis()) + "_" + rand + ext;
-				
-				try {
-					f.transferTo(new File(saveDir + "/" + reName)); 
-				} catch (IllegalStateException | IOException e) {
-					e.printStackTrace(); 
-				}
+		model.addAttribute("searchUrl", "/main");
 
-				
-			}
-		}
-		return "uploadEnd";
+		return null;
+		
 	}
 	
 	// 상품 등록 

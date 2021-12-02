@@ -54,8 +54,8 @@ public class WebController {
 	public String index2(Model model) {
 		
 		// 둘다 동일하게 메뉴 테이블의 칼럼들을 다 가져옴 
-//		model.addAttribute("menus", menuRepository.findAll());
-		model.addAttribute("menus", menuService.findAll());
+		model.addAttribute("menus", menuRepository.findAll());
+
 
 		return "index2";
 	}
@@ -67,18 +67,7 @@ public class WebController {
 		return "indexcart";
 	}
 	
-	// '담기' 버튼을 누르면 메뉴명,가격 등의 정보를 세션에 담아 /index/메뉴번호 로 이동하여 출력
-	@GetMapping("/index/{menuid}")
-	public String carts(@PathVariable("menuid") int menuid, Model model, HttpSession session) {
-		if(session.getAttribute("cart") == null) {
-			List<Cart> cart = new ArrayList<Cart>();
-			cart.add(new Cart(menuService.find(menuid), 1));
-			session.setAttribute("cart", cart);
-		} else {
-			
-		}
-		return "cartindex";
-	}
+	
 	
 	
 	
