@@ -4,7 +4,9 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -67,5 +69,39 @@ public class ApiController {
 		}
 		
 	}
+	
+	
+	// PRODUCT DELETE ( 삭제 )
+		@DeleteMapping("/delete")
+		   public Menu deletePregister(@RequestBody Menu menu) {
+		      
+		      System.out.println();
+		      
+		      Optional<Menu> m = menuRepository.findById(menu.getMenuid());
+		      System.out.println(m);
+
+		      if (m.isPresent()) {      
+		         menuRepository.deleteById(m.get().getMenuid());      
+		      } 
+		      return menu;
+		   }
+
+		// PRODUCT MODIFY ( 수정 )
+		@PutMapping("/modify")
+		   public Menu modifyPregister(@RequestBody Menu menu) {
+		      
+		      Optional<Menu> searchedMenu = menuRepository.findById(menu.getMenuid());
+		      System.out.println(menu.getMenuname());
+		      // 메뉴가 존재하는 경우.
+		      
+		      searchedMenu.get().setMenuname(menu.getMenuname());
+		      searchedMenu.get().setKind(menu.getKind());
+		      searchedMenu.get().setPrice(menu.getPrice());
+		      searchedMenu.get().setStock(menu.getStock());
+		      searchedMenu.get().setEx(menu.getEx());
+		      menuRepository.save(menu);
+		      
+		      return menu;
+		   }
 
 }

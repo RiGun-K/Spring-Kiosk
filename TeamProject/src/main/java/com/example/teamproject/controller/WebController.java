@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.example.teamproject.repository.KindRepository;
 import com.example.teamproject.repository.MenuRepository;
 import com.example.teamproject.repository.UserRepository;
 import com.example.teamproject.service.MenuService;
@@ -35,7 +36,12 @@ public class WebController {
 	MenuRepository menuRepository;
 	
 	@Autowired
+	KindRepository kindRepository;
+	
+	@Autowired
 	MenuService menuService;
+	
+	
 
 	//  FIRST PAGE
 	@GetMapping("/")
@@ -57,17 +63,16 @@ public class WebController {
 	
 	
 	@GetMapping("/indexcart")
-	public String indexcart(Model model) {
-		model.addAttribute("menus", menuService.findAll());
+	public String indexcart() {
 		return "indexcart";
 	}
 	
 	// '담기' 버튼을 누르면 메뉴명,가격 등의 정보를 세션에 담아 /index/메뉴번호 로 이동하여 출력
-	@GetMapping("/index/{id}")
-	public String carts(@PathVariable("id") int id, Model model, HttpSession session) {
+	@GetMapping("/index/{menuid}")
+	public String carts(@PathVariable("menuid") int menuid, Model model, HttpSession session) {
 		if(session.getAttribute("cart") == null) {
 			List<Cart> cart = new ArrayList<Cart>();
-			cart.add(new Cart(menuService.find(id), 1));
+			cart.add(new Cart(menuService.find(menuid), 1));
 			session.setAttribute("cart", cart);
 		} else {
 			
@@ -78,23 +83,23 @@ public class WebController {
 	
 	
 	// CART PAGE
-	@GetMapping("/cart")
-	@ModelAttribute("cart")
-	public String cart(HttpServletRequest request, Model model, HttpSession session) throws Exception {
-		
-		// 여기에 '담기' 버튼을 클릭한 정보 ( 상품수량,명 등 ) 이 담겨야 함 ! 
-		model.addAttribute("menus", menuRepository.findAll());
-		
-		// 세션 선언
-		session = request.getSession();
-		// session 저장( 값 부여 )
-//		session.setAttribute("저장하고자 하는 변수이름", 저장 변수값);
-		session.setAttribute("cart", "menus");
-		// session 가져오기 ( 조회 ) 
-		String userid = (String)session.getAttribute("cart");
-		System.out.println(userid);
-		return "Cart";
-	}
+//	@GetMapping("/cart")
+//	@ModelAttribute("cart")
+//	public String cart(HttpServletRequest request, Model model, HttpSession session) throws Exception {
+//		
+//		// 여기에 '담기' 버튼을 클릭한 정보 ( 상품수량,명 등 ) 이 담겨야 함 ! 
+//		model.addAttribute("menus", menuRepository.findAll());
+//		
+//		// 세션 선언
+//		session = request.getSession();
+//		// session 저장( 값 부여 )
+////		session.setAttribute("저장하고자 하는 변수이름", 저장 변수값);
+//		session.setAttribute("cart", "menus");
+//		// session 가져오기 ( 조회 ) 
+//		String userid = (String)session.getAttribute("cart");
+//		System.out.println(userid);
+//		return "Cart";
+//	}
 
 	// PAYMENT PAGE
 	@GetMapping("/payment")
@@ -138,15 +143,15 @@ public class WebController {
 	}
 	
 	// PRODUCT MODIFY
-	@GetMapping("/pcheck/{menuid}")
-	public String getMenu(@PathVariable("menuid") int menuid, Model model) {
-		// 주소창의 menuid 값이 <Menu> 에 있는가 
-		Optional<Menu> searchedPost = menuRepository.findById(menuid);
-		if(searchedPost.isPresent()) {
-			model.addAttribute("menuid", searchedPost.get());
-		}
-		return "Pmodify";
-	}
+    @GetMapping("/pcheck/{menuid}")
+    public String getMenu(@PathVariable("menuid") int menuid, Model model) {
+       // 주소창의 postId 값이 <Post> 에 있는가 
+       Optional<Menu> searchedMenu = menuRepository.findById(menuid);
+           model.addAttribute("kind", kindRepository.findAll());
+          model.addAttribute("menu", searchedMenu.get());
+       
+       return "Pmodify";
+    }
 	
 	
 	// PRODUCT SALES STATS

@@ -25,7 +25,13 @@ public class MenuServiceImpl implements MenuService {
 	@Override
 	public Menu find(int menuid) {
 		// TODO Auto-generated method stub
-		return menuRepository.findById(menuid);
+		return null;
 	}
+
+//	@Override
+//	public Menu find(int menuid) {
+//		// TODO Auto-generated method stub
+//		return menuRepository.findById(menuid);
+//	}
 
 }
