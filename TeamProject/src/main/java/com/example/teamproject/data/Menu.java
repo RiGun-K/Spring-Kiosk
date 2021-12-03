@@ -1,6 +1,5 @@
 package com.example.teamproject.data;
 
-import java.sql.Blob;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -29,12 +28,17 @@ public class Menu {
 	// 우선 자동으로 등록되도록 설정했음  
 	private int menuid;
 	
-	@Column(nullable=false)
+	// @Column(nullable=false)
+	
+	@Column
 	private String menuname;
 	private int price;
 	private String ex;
 	private Integer stock;
 	private LocalDateTime savedTime;
+	private String filename;
+	private String filepath;
+
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "kind")
@@ -49,6 +53,7 @@ public class Menu {
 	public void setSavedTime(LocalDateTime savedTime) {
 		this.savedTime = savedTime;
 	}
+	
 	public Menu(){}
 	public Menu(int menuid, String menuname, int price, String filename, String filepath, String ex, Kind kind, int stock) {
 		this.menuid = menuid;
@@ -57,6 +62,8 @@ public class Menu {
 		this.ex = ex;
 		this.stock = stock;
 		this.kind = kind;
+		this.filename = filename;
+		this.filepath = filepath;
 
 	}
 	
@@ -96,6 +103,19 @@ public class Menu {
 	}
 	public void setStock(Integer stock) {
 		this.stock = stock;
+	}
+	
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+	public String getFilepath() {
+		return filepath;
+	}
+	public void setFilepath(String filepath) {
+		this.filepath = filepath;
 	}
 	
 	

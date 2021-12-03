@@ -1,5 +1,6 @@
 package com.example.teamproject.controller;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,10 +23,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.teamproject.repository.KindRepository;
 import com.example.teamproject.repository.MenuRepository;
 import com.example.teamproject.repository.UserRepository;
-import com.example.teamproject.service.ImageFileService;
 import com.example.teamproject.service.MenuService;
 import com.example.teamproject.data.Cart;
-import com.example.teamproject.data.ImageFile;
 import com.example.teamproject.data.Menu;
 import com.example.teamproject.mapper.MenuMapper;
 
@@ -43,7 +43,7 @@ public class WebController {
 	KindRepository kindRepository;
 	
 	@Autowired
-	ImageFileService imagefileService;
+	MenuService menuService;
 	
 	
 
@@ -128,13 +128,14 @@ public class WebController {
 		return "Pregister";
 	}
 	
-	@PostMapping("/main")
-	public String menuWritePro(ImageFile imagefile, Model model, MultipartFile file) throws Exception {
-		imagefileService.write(imagefile, file);
+	@PostMapping("/image/main")
+	public Menu menuWritePro(@RequestBody Menu menu, Menu menus, Model model, MultipartFile file) throws Exception {
+		menuService.write(menu, file);
 		
 //		model.addAttribute("message", "사진 등록완료");
 //		model.addAttribute("searchUrl", "/pregister");
-		return null;
+		
+		return menu;
 	}
 	
 	// PRODUCT CHECK
