@@ -18,17 +18,17 @@ public class MenuService {
 	@Autowired
 	private MenuRepository menuRepository;
 	
-	public void write(Menu menu, MultipartFile file) throws Exception {
+	public void write(Menu menu, MultipartFile filename) throws Exception {
 		// TODO Auto-generated method stub
 		String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\images";
 		 
 		UUID uuid = UUID.randomUUID();
 		
-		String fileName = uuid + "_" + file.getOriginalFilename();
+		String fileName = uuid + "_" + filename.getOriginalFilename();
 		
 		File saveFile = new File(projectPath, fileName);
 		
-		file.transferTo(saveFile);
+		filename.transferTo(saveFile);
 		
 		menu.setFilename(fileName);
 		menu.setFilepath("/images/" + fileName);

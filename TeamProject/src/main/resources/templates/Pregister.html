@@ -274,7 +274,7 @@
 				
 
                 <!-- IMAGE -->
-                <form name="form" method="post" enctype="multipart/form-data" action="/pcheck">
+                <form name="form" method="post" enctype="multipart/form-data" action="/">
                     <div class="inputArea">
                         <h3 class="join_title"><label for="name">사진등록</label></h3>
                          <input type="file" id="filename" name="file"/>
@@ -300,6 +300,7 @@
 
                     </div>
                 
+                </form>
 
                 
 
@@ -310,7 +311,6 @@
                         <span>등록하기</span>
                     </button>
                 </div>
-                </form>
                 
 
             </div> 
@@ -337,8 +337,9 @@
                 if(kindid==''||menuname==''||price==''||stock==''||ex==''){
 					  alert('상품등록 하려면 모든 항목을 입력해야 합니다.');
 					  return;
-				  }
-				const path = '/api/pregister';
+                  }
+                  
+				const path = '/image/main';
 				const json = JSON.stringify({
 					kind:{
                         // kind 테이블 : { kindid : kind }
