@@ -129,7 +129,7 @@ public class WebController {
 	}
 	
 	@PostMapping("/image/main")
-	public Menu menuWritePro(@RequestBody Menu menu, Menu menus, Model model, MultipartFile filename) throws Exception {
+	public Menu menuWritePro(@RequestBody Menu menu, Menu menus, Model model, @RequestParam("filename") MultipartFile filename) throws Exception {
 		menuService.write(menu, filename);
 		
 //		model.addAttribute("message", "사진 등록완료");

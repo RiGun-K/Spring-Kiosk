@@ -70,7 +70,7 @@ public class ApiController {
 	
 	// 상품 등록 
 	@PostMapping("/pregister")
-	public Menu addPregister(@RequestBody Menu menu) {
+	public Menu addPregister(@RequestBody Menu menu, @RequestParam FileName filename) {
 		// 추후 DB 코드 추가 = 아이디,이름 값이 저장버튼으로 넘어온 데이터를 받아서 DB에 Insert
 		if(menu.getSavedTime()==null)
 			menu.setSavedTime(LocalDateTime.now());
