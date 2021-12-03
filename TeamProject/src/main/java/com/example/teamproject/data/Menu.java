@@ -32,8 +32,6 @@ public class Menu {
 	@Column(nullable=false)
 	private String menuname;
 	private int price;
-	private String filename;
-	private String filepath;
 	private String ex;
 	private Integer stock;
 	private LocalDateTime savedTime;
@@ -56,8 +54,6 @@ public class Menu {
 		this.menuid = menuid;
 		this.menuname = menuname;
 		this.price = price;
-		this.filename = filename;
-		this.filepath = filepath;
 		this.ex = ex;
 		this.stock = stock;
 		this.kind = kind;
@@ -102,18 +98,7 @@ public class Menu {
 		this.stock = stock;
 	}
 	
-	public String getFilename() {
-		return filename;
-	}
-	public void setFilename(String filename) {
-		this.filename = filename;
-	}
-	public String getFilepath() {
-		return filepath;
-	}
-	public void setFilepath(String filepath) {
-		this.filepath = filepath;
-	}
+	
 	
 	////////////////////////
 	

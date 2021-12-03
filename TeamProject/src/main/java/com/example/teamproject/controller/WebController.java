@@ -13,19 +13,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.teamproject.repository.KindRepository;
 import com.example.teamproject.repository.MenuRepository;
 import com.example.teamproject.repository.UserRepository;
+import com.example.teamproject.service.ImageFileService;
 import com.example.teamproject.service.MenuService;
 import com.example.teamproject.data.Cart;
+import com.example.teamproject.data.ImageFile;
 import com.example.teamproject.data.Menu;
 import com.example.teamproject.mapper.MenuMapper;
 
 @Controller
-@SessionAttributes("cart")	// ModelAttribute("cart")를 찾는다.
+//@SessionAttributes("cart")	// ModelAttribute("cart")를 찾는다.
 public class WebController {
 	
 
@@ -39,7 +43,7 @@ public class WebController {
 	KindRepository kindRepository;
 	
 	@Autowired
-	MenuService menuService;
+	ImageFileService imagefileService;
 	
 	
 
@@ -122,6 +126,15 @@ public class WebController {
 	@GetMapping("/pregister")
 	public String pregister() {
 		return "Pregister";
+	}
+	
+	@PostMapping("/main")
+	public String menuWritePro(ImageFile imagefile, Model model, MultipartFile file) throws Exception {
+		imagefileService.write(imagefile, file);
+		
+//		model.addAttribute("message", "사진 등록완료");
+//		model.addAttribute("searchUrl", "/pregister");
+		return null;
 	}
 	
 	// PRODUCT CHECK

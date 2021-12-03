@@ -56,17 +56,7 @@ public class ApiController {
 	}
 	
 	
-	// 이미지 등록
-	@PostMapping("/image/pregister")
-	public String uploadFile(Menu menu, Model model, MultipartFile file) throws Exception {
-		
-		menuService.write(menu, file);
-		
-		model.addAttribute("searchUrl", "/main");
 
-		return null;
-		
-	}
 	
 	// 상품 등록 
 	@PostMapping("/pregister")
