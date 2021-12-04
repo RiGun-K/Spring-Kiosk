@@ -13,6 +13,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.example.teamproject.service.UserDetailsServiceImpl;
 
+
+// 페이지 권한 설정
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -41,10 +44,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    http
 	        .authorizeRequests() // 6
 	            .antMatchers("/login", "/register", "/index").permitAll() // 누구나 접근 허용
-	            .antMatchers("/main", "/pregister", "/pcheck", "/pcheck/{menuid}", "/pstats").hasRole("user") // USER, ADMIN만 접근 가능
+	            .antMatchers("/main", "/pregister", "/pcheck", "/pmodify", "/pcheck/{menuid}", "/pstats").hasRole("user") // USER, ADMIN만 접근 가능
 	            .antMatchers("/**").permitAll()		// 위 경우를 빼고 모든 권한을 줌 = 로그인 필요 X
 	            .anyRequest().authenticated() // 나머지 요청들은 권한의 종류에 상관 없이 권한이 있어야 접근 가능
-	            .and() 
+	         .and()
+	         	.csrf()
+	         	// 아래 주소들은 POST 방식의 Security 접근 허용 
+	         	.ignoringAntMatchers("/api/pregister")
+	         	.ignoringAntMatchers("/pcheck")
+	         	.ignoringAntMatchers("/pmodify")
+	         	
+	         	.and()
 	         .formLogin()
 	         	.loginPage("/login")
 	         	.defaultSuccessUrl("/main")
@@ -52,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	         	.and()
 	         .logout() // 8
 	          	.logoutUrl("/logout")
-	            .logoutSuccessUrl("/login") // 로그아웃 성공시 리다이렉트 주소
+	            .logoutSuccessUrl("/") // 로그아웃 성공시 리다이렉트 주소
 	            .invalidateHttpSession(true) // 세션 날리기
 	            .and()
 	         .exceptionHandling()

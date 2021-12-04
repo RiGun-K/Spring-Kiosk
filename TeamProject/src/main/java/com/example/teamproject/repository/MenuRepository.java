@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 import com.example.teamproject.data.Menu;
 
 @Repository
-public interface MenuRepository extends JpaRepository<Menu, Integer> { 
+public interface MenuRepository extends JpaRepository<Menu, Integer> {
+
+	void save(int kindid); 
 
 // DAO 기능 ( DB에 접속, 명령 기능 클래스 )
 

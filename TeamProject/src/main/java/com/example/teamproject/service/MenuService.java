@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.teamproject.data.Kind;
 import com.example.teamproject.data.Menu;
 import com.example.teamproject.repository.MenuRepository;
 
@@ -18,17 +19,17 @@ public class MenuService {
 	@Autowired
 	private MenuRepository menuRepository;
 	
-	public void write(Menu menu, MultipartFile filename) throws Exception {
+	public void write(Menu menu, Kind kind, String menuname, int price, int stock, String ex, MultipartFile file) throws Exception {
 		// TODO Auto-generated method stub
 		String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\images";
 		 
 		UUID uuid = UUID.randomUUID();
 		
-		String fileName = uuid + "_" + filename.getOriginalFilename();
+		String fileName = uuid + "_" + file.getOriginalFilename();
 		
 		File saveFile = new File(projectPath, fileName);
 		
-		filename.transferTo(saveFile);
+		file.transferTo(saveFile);
 		
 		menu.setFilename(fileName);
 		menu.setFilepath("/images/" + fileName);
@@ -36,8 +37,18 @@ public class MenuService {
 		if(menu.getSavedTime()==null)
 			menu.setSavedTime(LocalDateTime.now());
 		
+		menu.setMenuname(menuname);
+		menu.setPrice(price);
+		menu.setEx(ex);
+		menu.setStock(stock);
+		menu.setKind(kind);
+		
 		
 		menuRepository.save(menu);
 	}
+
+
+
+	
 }
  

@@ -17,6 +17,7 @@
 	<div class="form-group">
     <div class="col-md-5">
 	<form class="form-horizontal">
+
   		<div class="form-group">
     		<label for="inputEmail3" class="col-sm-2 control-label">ID</label>
     			<div class="col-sm-10">
@@ -40,7 +41,7 @@
 	
 	<!-- 버튼(#save)이 클릭됬을때, 아이디,패스워드 읽어오자  -->
 	<!-- if문을 사용하여 input에 빈칸일경우 alert로 return하는 코드 작성 -->
-	<script>
+	<script th:inline="javascript">
 		$(function(){
 			$('#save').click((event)=>{
 				const userid = $('#userid').val();
@@ -54,14 +55,17 @@
 					userid:userid,
 					password:password
 				});
+				const csrfToken=/*[[${_csrf.token}]]*/ null;
+				const csrfHeader=/*[[${_csrf.headerName}]]*/ null;
 				$.ajax({
 					url:path,
 					type:'POST',
 					contentType: 'application/json',
 					data:json,
+					beforeSend:function(xhr){ xhr.setRequestHeader(csrfHeader, csrfToken);},
 				    error:function(request,status,error){
 				        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
-
+					
 				})
 				
 				.done((result)=>{

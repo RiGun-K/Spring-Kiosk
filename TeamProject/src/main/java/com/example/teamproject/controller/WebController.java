@@ -134,15 +134,15 @@ public class WebController {
 		return "Pregister";
 	}
 	
-	@PostMapping("/image/main")
-	public Menu menuWritePro(@RequestBody Menu menu, Menu menus, Model model, @RequestParam("filename") MultipartFile filename) throws Exception {
-		menuService.write(menu, filename);
-		
-//		model.addAttribute("message", "사진 등록완료");
-//		model.addAttribute("searchUrl", "/pregister");
-		
-		return menu;
-	}
+//	@PostMapping("/image/main")
+//	public Menu menuWritePro(@RequestBody Menu menu, Menu menus, Model model, @RequestParam("filename") MultipartFile filename) throws Exception {
+//		menuService.write(menu, filename);
+//		
+////		model.addAttribute("message", "사진 등록완료");
+////		model.addAttribute("searchUrl", "/pregister");
+//		
+//		return menu;
+//	}
 	
 	// PRODUCT CHECK
 	@GetMapping("/pcheck")

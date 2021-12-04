@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.teamproject.repository.KindRepository;
 import com.example.teamproject.repository.MenuRepository;
 import com.example.teamproject.repository.UserRepository;
 import com.example.teamproject.service.MenuService;
+import com.example.teamproject.data.Kind;
 import com.example.teamproject.data.Menu;
 import com.example.teamproject.data.Result;
 import com.example.teamproject.data.User;
@@ -44,6 +46,9 @@ public class ApiController {
 	private MenuRepository menuRepository;
 	
 	@Autowired
+	private KindRepository kindRepository;
+	
+	@Autowired
 	private MenuService menuService;
 	
 	@PostMapping("/register")
@@ -60,7 +65,7 @@ public class ApiController {
 	@PostMapping("/image/pregister")
 	public String uploadFile(Menu menu, Model model, MultipartFile file) throws Exception {
 		
-		menuService.write(menu, file);
+//		menuService.write(menu, file);
 		
 		model.addAttribute("searchUrl", "/main");
 
@@ -70,11 +75,19 @@ public class ApiController {
 	
 	// 상품 등록 
 	@PostMapping("/pregister")
-	public Menu addPregister(@RequestBody Menu menu, @RequestParam File filename) {
-		// 추후 DB 코드 추가 = 아이디,이름 값이 저장버튼으로 넘어온 데이터를 받아서 DB에 Insert
-		if(menu.getSavedTime()==null)
-			menu.setSavedTime(LocalDateTime.now());
-		menuRepository.save(menu);
+	public Menu addPregister(Menu menu, @RequestParam(name="kindid") Kind kind,
+			@RequestParam(name="menuname") String menuname,
+			@RequestParam(name="price") int price,
+			@RequestParam(name="stock") int stock,
+			@RequestParam(name="ex") String ex,
+			@RequestParam(name="filename") MultipartFile file, 
+			Model model) throws Exception {
+		// 추후 DB 코드 추가 = 아이디,이름 값이 저장버튼으로 넘어온 데이터를 받아서 DB에 Insert 
+		
+		model.addAttribute("kind", kindRepository.findAll());
+		
+		
+		menuService.write(menu, kind, menuname, price, stock, ex, file);
 		return menu;
 	}
 	

@@ -34,7 +34,7 @@ public class Menu {
 	private String menuname;
 	private int price;
 	private String ex;
-	private Integer stock;
+	private int stock;
 	private LocalDateTime savedTime;
 	private String filename;
 	private String filepath;
