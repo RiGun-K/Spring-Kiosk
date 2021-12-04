@@ -36,6 +36,9 @@ dependencies {
 	// 파일 처리 의존성 
 	implementation 'commons-io:commons-io:2.6'
 
+	// 패스워드 암호화
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.4.5'
+
 	
 }
 

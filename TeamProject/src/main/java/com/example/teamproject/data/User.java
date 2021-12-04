@@ -14,7 +14,7 @@ public class User {
 	@Id
 	private String userid;
 	@Column(nullable=false, length=100)
-	private Object password;
+	private String password;
 	@Column
 	private LocalDateTime savedTime;
 	
@@ -26,7 +26,7 @@ public class User {
 		this.savedTime = savedTime;
 	}
 	public User() {}
-	public User(String userid, Object password) {
+	public User(String userid, String password) {
 		// TODO Auto-generated constructor stub
 		this.userid = userid;
 		this.password = password;
@@ -38,10 +38,10 @@ public class User {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
-	public Object getPassword() {
+	public String getPassword() {
 		return password;
 	}
-	public void setPassword(Object password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 	
