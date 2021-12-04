@@ -1,5 +1,6 @@
 package com.example.teamproject.controller;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -110,6 +111,11 @@ public class WebController {
 	@GetMapping("/register")
 	public String register() {
 		return "AdminRegister";
+	}
+	
+	@GetMapping("/denied")
+	public String denied() {
+		return "denied";
 	}
 	
 	

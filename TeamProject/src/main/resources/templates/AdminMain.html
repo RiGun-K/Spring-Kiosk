@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -14,7 +15,7 @@
 
 <!-- { 상품등록 전체상품조회 상품수정 매출통계 } 메뉴바로 구성된 화면 !-->
 <h2>관리자 페이지</h2>
-
+<h3><span sec:authentication="name"></span>님 환영합니다!</h3>
 	<div class="row side_nav">
 		<ul class="nav nav-pills nav-stacked">
 			<li class="active li_btns"><a>관리자 메뉴</a></li>
@@ -24,6 +25,11 @@
 			<li class="li_btns"><a href="/pstats">매출 통계</a></li>
 		</ul>
 	</div>
+
+	<form name="logoutForm" th:action="@{/logout}" method="post">
+	<input type="submit" value="Sign Out"/>
+	</form>
+
 
 </body>
 </html>

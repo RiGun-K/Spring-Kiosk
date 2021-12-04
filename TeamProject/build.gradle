@@ -37,8 +37,8 @@ dependencies {
 	implementation 'commons-io:commons-io:2.6'
 
 	// 패스워드 암호화
-	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.4.5'
-
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 	
 }
 
