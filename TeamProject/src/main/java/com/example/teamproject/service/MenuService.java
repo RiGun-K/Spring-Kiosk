@@ -19,7 +19,7 @@ public class MenuService {
 	@Autowired
 	private MenuRepository menuRepository;
 	
-	public void write(Menu menu, Kind kind, String menuname, int price, int stock, String ex, MultipartFile file) throws Exception {
+	public void write(Menu menu, MultipartFile file) throws Exception {
 		// TODO Auto-generated method stub
 		String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\images";
 		 
@@ -36,12 +36,6 @@ public class MenuService {
 		
 		if(menu.getSavedTime()==null)
 			menu.setSavedTime(LocalDateTime.now());
-		
-		menu.setMenuname(menuname);
-		menu.setPrice(price);
-		menu.setEx(ex);
-		menu.setStock(stock);
-		menu.setKind(kind);
 		
 		
 		menuRepository.save(menu);

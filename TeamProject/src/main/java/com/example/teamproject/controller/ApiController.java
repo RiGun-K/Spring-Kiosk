@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -75,19 +76,13 @@ public class ApiController {
 	
 	// 상품 등록 
 	@PostMapping("/pregister")
-	public Menu addPregister(Menu menu, @RequestParam(name="kind") Kind kind,
-			@RequestParam(name="menuname") String menuname,
-			@RequestParam(name="price") int price,
-			@RequestParam(name="stock") int stock,
-			@RequestParam(name="ex") String ex,
-			@RequestParam(name="filename") MultipartFile file, 
-			Model model) throws Exception {
+	public Menu addPregister(@RequestBody Menu menu) throws Exception {
 		// 추후 DB 코드 추가 = 아이디,이름 값이 저장버튼으로 넘어온 데이터를 받아서 DB에 Insert 
+
 		
-		model.addAttribute("kind", kindRepository.findAll());
-		
-		
-		menuService.write(menu, kind, menuname, price, stock, ex, file);
+		if(menu.getSavedTime()==null)
+			menu.setSavedTime(LocalDateTime.now());
+		menuRepository.save(menu);
 		return menu;
 	}
 	

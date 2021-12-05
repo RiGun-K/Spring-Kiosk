@@ -23,6 +23,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.teamproject.repository.KindRepository;
 import com.example.teamproject.repository.MenuRepository;
+import com.example.teamproject.repository.ODetailRepository;
+import com.example.teamproject.repository.OrderedRepository;
 import com.example.teamproject.repository.UserRepository;
 import com.example.teamproject.service.MenuService;
 import com.example.teamproject.data.Cart;
@@ -43,6 +45,9 @@ public class WebController {
 	
 	@Autowired
 	KindRepository kindRepository;
+	
+	@Autowired
+	OrderedRepository orderedRepository;
 	
 	@Autowired
 	MenuService menuService;
@@ -160,8 +165,8 @@ public class WebController {
 		
 		
 		
-		
-		menuService.write(menu, kind, menuname, price, stock, ex, file);
+//		
+//		menuService.write(menu, kind, menuname, price, stock, ex, file);
 		return menu;
 	}
 	
@@ -186,7 +191,9 @@ public class WebController {
 	
 	// PRODUCT SALES STATS
 	@GetMapping("/pstats")
-	public String pstats() {
+	public String pstats(Model model) {
+
+		model.addAttribute("ordered", orderedRepository.findAll());
 		return "Pstats";
 	}
 }
