@@ -14,12 +14,12 @@ public class User {
 	@Id
 	private String userid;
 	@Column(nullable=false, length=100)
-	private String password="1111";
+	private String password="123";
 	@Column
 	private LocalDateTime savedTime;
 	
 	@Column(length=100)
-	private String role="user";
+	private String role="admin";
 	
 	
 

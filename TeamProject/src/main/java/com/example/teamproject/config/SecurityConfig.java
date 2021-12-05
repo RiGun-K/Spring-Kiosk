@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    http
 	        .authorizeRequests() // 6
 	            .antMatchers("/login", "/register", "/index").permitAll() // 누구나 접근 허용
-	            .antMatchers("/main", "/pregister", "/pcheck", "/pmodify", "/pcheck/{menuid}", "/pstats").hasRole("user") // USER, ADMIN만 접근 가능
+	            .antMatchers("/main", "/pregister", "/pcheck", "/pmodify", "/pcheck/{menuid}", "/pstats").hasRole("admin") // USER, ADMIN만 접근 가능
 	            .antMatchers("/**").permitAll()		// 위 경우를 빼고 모든 권한을 줌 = 로그인 필요 X
 	            .anyRequest().authenticated() // 나머지 요청들은 권한의 종류에 상관 없이 권한이 있어야 접근 가능
 	         .and()
