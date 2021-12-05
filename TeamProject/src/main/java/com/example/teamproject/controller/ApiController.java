@@ -75,7 +75,7 @@ public class ApiController {
 	
 	// 상품 등록 
 	@PostMapping("/pregister")
-	public Menu addPregister(Menu menu, @RequestParam(name="kindid") Kind kind,
+	public Menu addPregister(Menu menu, @RequestParam(name="kind") Kind kind,
 			@RequestParam(name="menuname") String menuname,
 			@RequestParam(name="price") int price,
 			@RequestParam(name="stock") int stock,

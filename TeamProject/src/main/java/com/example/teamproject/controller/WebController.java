@@ -26,6 +26,7 @@ import com.example.teamproject.repository.MenuRepository;
 import com.example.teamproject.repository.UserRepository;
 import com.example.teamproject.service.MenuService;
 import com.example.teamproject.data.Cart;
+import com.example.teamproject.data.Kind;
 import com.example.teamproject.data.Menu;
 import com.example.teamproject.mapper.MenuMapper;
 
@@ -130,7 +131,9 @@ public class WebController {
 	
 	// PRODUCT REGISTER
 	@GetMapping("/pregister")
-	public String pregister() {
+	public String pregister(Model model) {
+		// html 내 kind 값들을 조회하려면 GET 방식으로 봐야됨 
+		model.addAttribute("kind", kindRepository.findAll());
 		return "Pregister";
 	}
 	
@@ -143,6 +146,24 @@ public class WebController {
 //		
 //		return menu;
 //	}
+	
+	
+	@PostMapping("/pregister")
+	public Menu addPregister(Menu menu, @RequestParam(name="kind") Kind kind,
+			@RequestParam(name="menuname") String menuname,
+			@RequestParam(name="price") int price,
+			@RequestParam(name="stock") int stock,
+			@RequestParam(name="ex") String ex,
+			@RequestParam(name="filename") MultipartFile file, 
+			Model model) throws Exception {
+		// 추후 DB 코드 추가 = 아이디,이름 값이 저장버튼으로 넘어온 데이터를 받아서 DB에 Insert 
+		
+		
+		
+		
+		menuService.write(menu, kind, menuname, price, stock, ex, file);
+		return menu;
+	}
 	
 	// PRODUCT CHECK
 	@GetMapping("/pcheck")
