@@ -118,7 +118,7 @@ public class ApiController {
 	//index.html에서 각각의 카테고리버튼을 눌렀을 때 실행
 	@PostMapping("/index")
 	public List<Menu> index(@RequestBody Menu menu) {
-		System.out.println("옴");
+		System.out.println("Sucesses");
 		List<Menu> kindmenu2 = menuRepository.findAll();
 		if(menu.getKind().getKindid() == 0) {
 			return kindmenu2;
