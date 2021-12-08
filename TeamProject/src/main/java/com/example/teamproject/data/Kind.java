@@ -5,8 +5,12 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="kind")
@@ -17,7 +21,9 @@ public class Kind {
 	@Column(nullable=false)
 	private String kindname;
 	
-	@OneToMany(mappedBy = "kind")
+	@JsonManagedReference
+	@OneToMany
+	@JoinColumn(name = "kind")
 	private List<Menu> menus;
 	
 	public Kind() {}

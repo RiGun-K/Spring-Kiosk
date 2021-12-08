@@ -6,5 +6,4 @@ import com.example.teamproject.data.Kind;
 
 public interface KindRepository extends JpaRepository<Kind, Integer> {
 
-
 }

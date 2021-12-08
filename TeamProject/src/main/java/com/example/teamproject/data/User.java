@@ -14,21 +14,13 @@ public class User {
 	@Id
 	private String userid;
 	@Column(nullable=false, length=100)
-	private String password="123";
+	private String password;
 	@Column
 	private LocalDateTime savedTime;
-	
 	@Column(length=100)
 	private String role="admin";
 	
-	
 
-	public String getRole() {
-		return role;
-	}
-	public void setRole(String role) {
-		this.role = role;
-	}
 	public LocalDateTime getSavedTime() {
 		return savedTime;
 	}
@@ -54,7 +46,12 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
 
 	
 	

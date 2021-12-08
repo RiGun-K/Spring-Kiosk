@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <head>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<!-- BootStemp -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <meta charset="UTF-8">
+        <title>회원가입</title>
+		<!-- <link rel="stylesheet" href="register.css"> -->
+		
+		<style>
+                /* 레이아웃 틀 */
+        html {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            height: 100%;
+            background: #f5f6f7;
+            font-family: Dotum,'돋움',Helvetica,sans-serif;
+        }
+        #logo {
+            width: 240px;
+            height: 44px;
+            cursor: pointer;
+        }
+
+        #header {
+            padding-top: 62px;
+            padding-bottom: 20px;
+            text-align: center;
+        }
+        #wrapper {
+            position: relative;
+            height: 100%;
+        }
+
+        #content {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%);
+            width: 460px;
+        }
+
+
+
+
+        /* 입력폼 */
+
+
+        h3 {
+            margin: 19px 0 8px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+
+        .box {
+            display: block;
+            width: 100%;
+            height: 51px;
+            border: solid 1px #dadada;
+            padding: 10px 14px 10px 14px;
+            box-sizing: border-box;
+            background: #fff;
+            position: relative;
+        }
+
+        .int {
+            display: block;
+            position: relative;
+            width: 100%;
+            height: 29px;
+            border: none;
+            background: #fff;
+            font-size: 15px;
+        }
+
+        input {
+            font-family: Dotum,'돋움',Helvetica,sans-serif;    
+        }
+
+        .select_img img { 
+            margin:20px 0;
+        }
+
+        .box.int_id {
+            padding-right: 110px;
+        }
+
+        .box.int_pass {
+            padding-right: 40px;
+        }
+
+        .box.int_pass_check {
+            padding-right: 40px;
+        }
+
+        .step_url {
+            /*@naver.com*/
+            position: absolute;
+            top: 16px;
+            right: 13px;
+            font-size: 15px;
+            color: #8e8e8e;
+        }
+
+        .pswdImg {
+            width: 18px;
+            height: 20px;
+            display: inline-block;
+            position: absolute;
+            top: 50%;
+            right: 16px;
+            margin-top: -10px;
+            cursor: pointer;
+        }
+
+        #bir_wrap {
+            display: table;
+            width: 100%;
+        }
+
+        #bir_yy {
+            display: table-cell;
+            width: 147px;
+            
+        }
+
+        #bir_mm {
+            display: table-cell;
+            width: 147px;
+            vertical-align: middle;
+        }
+
+        #bir_dd {
+            display: table-cell;
+            width: 147px;
+        }
+
+        #bir_mm, #bir_dd {
+            padding-left: 10px;
+        }
+
+        select {
+            width: 100%;
+            height: 29px;
+            font-size: 15px;
+            background: #fff url(https://static.nid.naver.com/images/join/pc/sel_arr_2x.gif) 100% 50% no-repeat;
+            background-size: 20px 8px;
+            -webkit-appearance: none;
+            display: inline-block;
+            text-align: start;
+            border: none;
+            cursor: default;
+            font-family: Dotum,'돋움',Helvetica,sans-serif;
+        }
+
+        /* 에러메세지 */
+
+        .error_next_box {
+            margin-top: 9px;
+            font-size: 12px;
+            color: red;    
+            display: none;
+        }
+
+        #alertTxt {
+            position: absolute;
+            top: 19px;
+            right: 38px;
+            font-size: 12px;
+            color: red;
+            display: none;
+        }
+
+        /* 버튼 */
+
+        .btn_area {
+            margin: 30px 0 91px;
+        }
+
+        #btnJoin {
+            width: 100%;
+            padding: 21px 0 17px;
+            border: 0;
+            cursor: pointer;
+            color: #fff;
+            /* background-color: #08a600; */
+            background-color: #6799FF;
+            font-size: 20px;
+            font-weight: 400;
+            font-family: Dotum,'돋움',Helvetica,sans-serif;
+        }
+    
+        </style>
+    </head>
+    <body>
+        <!-- header -->
+        <!-- Ctrl+b 하면 바로가짐 -->
+		<!-- 파일은 C\TeamProject에 있음 -->
+		
+		<div id="header">
+            
+        </div>
+        
+
+        <!-- wrapper -->
+        <div id="wrapper">
+
+            <!-- content-->
+            <div id="content">
+
+				<h1>상품 등록</h1>
+				
+                <!-- KIND -->
+                <div>
+                    <h3 class="join_title"><label for="name">종류번호</label></h3>
+                    <span class="box int_name">
+                        <select id="kindid">
+                            <option value="1">닭발</option>
+                            <option value="2">돼지고기</option>
+                            <option value="3">분식</option>
+                            <option value="4">반찬</option>
+                            <option value="5">탕</option> 
+                            <option value="6">양식</option>
+                            <option value="7">기타</option>
+                        </select>
+                    </span>
+                    <span class="error_next_box"></span>
+                </div>
+
+                <!-- NAME -->
+                <div>
+                    <h3 class="join_title"><label for="name">메뉴명</label></h3>
+                    <span class="box int_name">
+                        <input type="text" id="menuname" class="int" maxlength="20">
+                    </span>
+                    <span class="error_next_box"></span>
+                </div>
+
+				<!-- PRICE -->
+                <div>
+                    <h3 class="join_title"><label for="name">가격</label></h3>
+                    <span class="box int_name">
+						<input type="text" id="price" class="int" maxlength="20">
+						<span class="step_url">원</span>
+                    </span>
+                    <span class="error_next_box"></span>
+                </div>
+                
+                <!-- STOCK -->
+                <div>
+                    <h3 class="join_title"><label for="name">수량</label></h3>
+                    <span class="box int_name">
+						<input type="text" id="stock" class="int" maxlength="20">
+						<span class="step_url">개</span>
+                    </span>
+                    <span class="error_next_box"></span>
+				</div>
+
+				
+				<!-- EX -->
+                <div>
+                    <h3 class="join_title"><label for="name">설명</label></h3>
+                    <span class="box int_name">
+                        <input type="text" id="ex" class="int" maxlength="20">
+                    </span>
+                    <span class="error_next_box"></span>
+				</div>
+				
+
+                <!-- IMAGE -->
+                    <div class="inputArea">
+                        <h3 class="join_title"><label for="name">사진등록</label></h3>
+                         <input type="file" id="filename" name="filename" value="filename"/>
+                         
+                         
+                         <div class="select_img"><img src="" /></div>
+                    
+                        
+
+                        <script>
+                        $("#filename").change(function(){
+                        if(this.files && this.files[0]) {
+                            var reader = new FileReader;
+                            reader.onload = function(data) {
+                            $(".select_img img").attr("src", data.target.result).width(300);        
+                            }
+                            reader.readAsDataURL(this.files[0]);
+                        }
+                        });
+                        </script>
+
+                        
+
+                    </div>
+                
+
+                
+
+                <!-- JOIN BTN-->
+                <div class="btn_area">
+                    <button type="button" id="save" class="btn btn-primary">
+                        <span>등록하기</span>
+                    </button>
+                </div>
+                
+                
+
+            </div> 
+            <!-- content-->
+
+        </div> 
+        <!-- wrapper -->
+    
+        <script>
+		$(function(){
+			$('#save').click((event)=>{
+                
+
+				const kind = $('#kind').val();
+                const menuname = $('#menuname').val();
+                const price = $('#price').val();
+                const stock = $('#stock').val();
+                const ex = $('#ex').val();
+                const filename = $('#filename').val();
+
+                const kindid = $('#kindid').val();
+                var a = ['닭발', '돼지고기', '분식', '반찬', '탕', '양식', '기타'];
+                const kindname = a[kindid];	
+                
+                if(kindid==''||menuname==''||price==''||stock==''||ex==''){
+					  alert('상품등록 하려면 모든 항목을 입력해야 합니다.');
+					  return;
+				  }
+				const path = '/api/pregister';
+				const json = JSON.stringify({
+					kind:{
+                        // kind 테이블 : { kindid : kind }
+                        kindid:kindid,
+                        kindname:kindname
+                    },
+                    menuname:menuname,
+                    price:price,
+                    stock:stock,
+                    ex:ex,
+                    filename:filename
+                   
+                });
+                console.log(json);
+				$.ajax({
+					url:path,
+					type:'POST',
+                    contentType: 'application/json',
+                    
+                    data:json,
+                    processData: false, 
+
+				    error:function(request,status,error){
+				        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
+
+				})
+				
+				.done((result)=>{
+					alert('상품등록 완료'); 
+					
+					var url = "http://localhost:9002/main";
+					window.location = url;
+					window.location.replace(url);
+					})
+				.fail((result)=>{
+					alert('상품등록 실패'); 
+					});
+			});
+		});
+	</script>
+    </body>
+</html>

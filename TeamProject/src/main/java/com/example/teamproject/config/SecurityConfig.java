@@ -53,7 +53,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	         	.ignoringAntMatchers("/api/pregister")
 	         	.ignoringAntMatchers("/pcheck")
 	         	.ignoringAntMatchers("/pmodify")
-	         	
+	         	.ignoringAntMatchers("/api/index")
+	         	.ignoringAntMatchers("/api/odetail")
+	         	.ignoringAntMatchers("/api/modify")
+	         	.ignoringAntMatchers("/api/delete")
+	         	.ignoringAntMatchers("/api/index")
 	         	.and()
 	         .formLogin()
 	         	.loginPage("/login")
