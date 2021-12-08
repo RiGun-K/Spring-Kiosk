@@ -22,6 +22,8 @@ import com.example.teamproject.repository.MenuRepository;
 import com.example.teamproject.repository.O_DetailRepository;
 import com.example.teamproject.repository.OrderedRepository;
 import com.example.teamproject.repository.UserRepository;
+import com.mysql.cj.protocol.Security;
+import com.example.teamproject.config.SecurityConfig;
 import com.example.teamproject.data.Kind;
 import com.example.teamproject.data.Menu;
 import com.example.teamproject.data.ODprocess;
@@ -51,8 +53,12 @@ public class ApiController {
 	
 	
 	@PostMapping("/register")
-	public User addUser(@RequestBody User user) {
+	public User addUser(@RequestBody User user, SecurityConfig sc) {
 		// 추후 DB 코드 추가 = 아이디,이름 값이 저장버튼으로 넘어온 데이터를 받아서 DB에 Insert
+		
+		String password = sc.passwordEncoder().encode(user.getPassword());
+		user.setPassword(password);
+		
 		if(user.getSavedTime()==null)
 			user.setSavedTime(LocalDateTime.now());
 		userRepository.save(user);
@@ -62,6 +68,7 @@ public class ApiController {
 	@PostMapping("/pregister")
 	public Menu addPregister(@RequestBody Menu menu) {
 		// 추후 DB 코드 추가 = 아이디,이름 값이 저장버튼으로 넘어온 데이터를 받아서 DB에 Insert
+		
 		if(menu.getSavedTime()==null)
 			menu.setSavedTime(LocalDateTime.now());
 		menuRepository.save(menu);
