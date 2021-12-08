@@ -71,8 +71,9 @@ public class ApiController {
 	@DeleteMapping("/delete")
 	public Menu deletePregister(@RequestBody Menu menu) {
 		
+		// 테이블에 menuid 가 있는지 확인 
 		Optional<Menu> m = menuRepository.findById(menu.getMenuid());
-
+		// 있으면 삭제
 		if (m.isPresent()) {		
 			menuRepository.deleteById(m.get().getMenuid());		
 		} 
@@ -85,6 +86,7 @@ public class ApiController {
 		Optional<Menu> searchedMenu = menuRepository.findById(menu.getMenuid());
 		// 메뉴가 존재하는 경우.
 		
+		// 기존값에서 api로 받은 값으로 수정 
 		searchedMenu.get().setMenuname(menu.getMenuname());
 		searchedMenu.get().setKind(menu.getKind());
 		searchedMenu.get().setPrice(menu.getPrice());
