@@ -41,6 +41,7 @@ public class Menu {
 	private String hide;
 	private String filename;
 	
+	// 양방향 관계에서 역방향 참조로, 추가하면 직렬화에서 제외된다  ( 자식 클래스 )
 	@JsonBackReference
 	@ManyToOne(targetEntity = Kind.class)
 	@JoinColumn(name = "kind")

@@ -60,8 +60,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	         	.and()
 	         .formLogin()
-	         	.loginPage("/login")
-	         	.defaultSuccessUrl("/main")
+	         	.loginPage("/login")		
+	         	.defaultSuccessUrl("/main")	// 로그인 성공시 /main 으로 
 	         	.permitAll()
 	         	.and()
 	         .logout() // 8

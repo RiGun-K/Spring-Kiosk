@@ -21,6 +21,7 @@ public class Kind {
 	@Column(nullable=false)
 	private String kindname;
 	
+	// 양방향 관계에서 정방향 참조할 변수에 추가하면 직렬화에 포함된다. ( 부모 클래스 ) 
 	@JsonManagedReference
 	@OneToMany
 	@JoinColumn(name = "kind")
