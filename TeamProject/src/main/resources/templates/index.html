@@ -86,6 +86,7 @@
                 </thead>
                 
                 <tbody class="tr1"> 
+				   <!-- tr의 값은 숨기지 않는 값(보여주는 것) value=1 로 설정 -->
                    <tr  th:if="${m.hide=='1'}" th:each='m : ${menus}' th:value="${m.hide}">
                    	<td></td>
                    	<td th:text="${m.menuid}" th:value="${m.stock}"></td>
@@ -114,9 +115,11 @@
 		              <th>수량</th>
 		              <th>삭제</th>		              
 		           </tr>
-		        </thead>
+				</thead>
+				<!-- 장바구니 담기는 body-->
 		        <tbody class="btr">             
-		        </tbody>
+				</tbody>
+				<!-- 결제로 담기는 body -->
 		        <tbody> 
 		        	<tr>
 		           	  <td> </td>
